@@ -46,14 +46,14 @@ class QuestionManager:
 
             
                    
-'''
+
     def add_question(self, question):
         self.questions.append(question)
         question_id = len(self.questions)
         question.id = question_id
         self.file_manager_instance.save_questions(self.questions)
 
-
+'''
 
     def view_statistics(self):
         for question in self.questions:
