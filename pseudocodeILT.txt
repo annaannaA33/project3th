@@ -1,0 +1,111 @@
+Класс Игрок:
+  Свойства:
+    - имя
+    - статистика
+
+  Методы:
+    - приветствие 
+    вывод правил: остановить - написать stop. тогда  программа пишет пока. Все данные сохраняются.
+    -вывод % правильных ответов, количество вопросов на изучение. если % правильных ответов  == 0, ничего не выводит
+    - выбор режима
+
+Класс  QuestionManager:
+self.questions = []
+self.file_manager = FileManager()
+
+  Свойства:
+    - 
+
+  Методы:
+    - добавить вопрос add_question(self, question, вид вопроса) выбор вида вопроса айди автоматически по порядку
+    - сметреть статистику def view_statistics(self)
+    - активность вопросов disable_enable_question(self, question_id, disable=True)
+    - практика PracticeMode
+    - TestMode(количество вопросов, время) генерируется тест, выводит: вопросы, потом показывает поличетво правильных ответов % правильный ответов
+
+class PracticeMode:
+    def __init__(self, question_manager):
+        self.question_manager = question_manager
+
+    def start_practice(self):
+        # Method to start the practice mode
+        pass
+
+class TestMode:
+    def __init__(self, question_manager):
+        self.question_manager = question_manager
+
+    def start_test(self, num_questions):
+        # Method to start the test mode
+        pass
+
+class FileManager:
+
+    def save_questions(self, file_path):
+         Method to save questions to a file
+        
+
+    def load_questions(self, file_path):
+         Method to load questions from a file
+        
+
+    def save_statistics(self, file_path):
+         Method to save statistics to a file
+       
+
+    def load_statistics(self, file_path):
+         Method to load statistics from a file
+        
+class PracticeMode:
+    
+
+    def start_practice(self):
+        # Method to start the practice mode
+        pass
+
+class TestMode:
+    
+
+    def start_test(self, num_questions):
+        # Method to start the test mode
+        pass
+
+class Question:
+    def __init__(self, id, question_type, question_text, answer, is_active=True):
+        self.id = id # геренируется прото по порядку
+        self.question_type = question_type
+        self.question_text = question_text
+        self.answer = answer
+        self.is_active = is_active
+        self.practice_count = 0   #сколько раз он отображался во время практики
+        self.test_count = 0    #сколько раз он отображался во время тестирования
+        self.correct_count = 0   #процент правильных ответов на данный вопрособщий
+
+    def get_question_type(self):
+        return self.question_type
+
+    def get_question_text(self):
+        return self.question_text
+
+    def get_answer(self):
+        return self.answer
+
+    def is_active(self):
+        return self.is_active
+
+
+class MultipleChoiceQuestion(Question):
+    def __init__(self, question_text, answer_options, correct_option, is_active=True):
+        super().__init__('multiple_choice', question_text, answer_options, is_active)
+        self.correct_option = correct_option
+
+    def get_correct_option(self):
+        return self.correct_option
+
+
+class FreeFormQuestion(Question):
+    def __init__(self, question_text, expected_answer, is_active=True):
+        super().__init__('free_form', question_text, expected_answer, is_active)
+Основной код
+
+
