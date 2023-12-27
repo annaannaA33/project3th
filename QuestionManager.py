@@ -11,7 +11,6 @@ class QuestionManager:
         self.questions = []
 
     
-#Добавить првоерку ввода!!!
     def add_question_menu(self):
 
         while True:
@@ -25,8 +24,9 @@ class QuestionManager:
                 
                 
                     if question_type == '1':
-                        question_answer = input("Enter the answer: ")
-                    
+                        expected_answer = input("Enter the answer: ")
+                        self.question = FreeFormQuestion(question_text, expected_answer)
+
                     elif question_type == '2':
                         question_answer = {}
                         num_options = int(input("Enter the number of answer options: "))
@@ -40,20 +40,17 @@ class QuestionManager:
                 main_manu()
             else:
                 print("Invalid question type.")
-
-            
-                        
-
-            
+    
+ 
                    
-'''
+
     def add_question(self, question):
         self.questions.append(question)
         question_id = len(self.questions)
         question.id = question_id
-        self.file_manager_instance.save_questions(self.questions)
+       # self.file_manager_instance.save_questions(self.questions)
 
-
+'''
 
     def view_statistics(self):
         for question in self.questions:
