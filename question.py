@@ -2,15 +2,15 @@ import datetime
 
 
 class Question:
-    def __init__(self, id, question_type, question_text, is_active=True, practice_count=0, test_count=0, correct_count=0):
+    def __init__(self, id, question_type, question_text, is_active=True, practice_count=0, test_count=0, correct_count=0, total_questions = 0):
         self.id = id # геренируется просто по порядку
         self.question_type = question_type
         self.question_text = question_text
         self.is_active = is_active
         self.practice_count = practice_count   #сколько раз он отображался во время практики
         self.test_count = test_count    #сколько раз он отображался во время тестирования
-        self.correct_count = correct_count   #процент правильных ответов на данный вопрос общий
-        self.total_correct_percentage = 0  # Инициал
+        self.correct_count =    #процент правильных ответов на данный вопрос общий
+        self.total_correct_percentage = 0  # 
         self.total_questions = 0 # обшее количество вопросов
         
     def get_question_type(self):

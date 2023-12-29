@@ -16,7 +16,7 @@ class FileManager:
     #сохраняем все в фаил в формате json
     def save_free_form_question(self, file_path='questions.json', new_question_list):
         data = {'id': id #присваиваем порядковый номер в общем списке в файле, начиная с первого, 
-                 'question_type': q.get_question_type(), 
+                 'question_type': question.get_question_type(), 
                  'question_text': new_question_list[question_text],
                  'correct_option': new_question_list[correct_option],
                  'options': options[] 
@@ -61,6 +61,7 @@ question_id = len(self.questions)
         with open(file_path, 'w') as file:
             json.dump(data, file)
 '''
+
     def create_question_from_data(self, data: dict) -> Union[FreeFormQuestion, MultipleChoiceQuestion]:
         if data['question_type'] == 'free_form':
             return FreeFormQuestion(data['question_text'], data['answer'], data['is_active'])
