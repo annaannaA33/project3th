@@ -12,7 +12,7 @@ class TestMode:
         if len(active_questions) < num_questions:
             print("Not enough active questions for the test.")
             return 
-
+        '''
         selected_questions = shuffle(active_questions)[:num_questions]
 
         correct_answers = 0
@@ -38,3 +38,4 @@ class TestMode:
                 return False
         else:
             return user_answer.lower() == question.get_answer().lower()
+                '''

@@ -1,4 +1,3 @@
-from random import choices, shuffle
 from Player import Player, welcome_player
 from FileManager import FileManager
 from QuestionManager import QuestionManager
@@ -21,8 +20,9 @@ def main():
 
 
 def practice_mode():
-    practice = PracticeMode()
-    practice.start_practice()
+    pass
+    #practice = PracticeMode()
+    #practice.start_practice()
 
 def test_mode_menu(self):
     num_questions = int(input("Enter the number of questions for the test: "))
@@ -52,17 +52,18 @@ def main_manu(question_manager, file_manager):
             if len(new_question_list) > 0:
                 file_manager.save_questions_to_json(new_question_list)
                 print(f"вы успешно добавили {len(new_question_list)} вопросов")
-            else # если ничего не сохранено в список вопросв, то print(вопросы не сохранены), вы уверены что хотите вернуться в меню?
-            # есл(и пользователь пишет да , то идем в главное меню 
-                print("")
+            else:
+                print("You haven't saved any questions")
         elif player_choice == '2':
             question_manager.view_statistics()
-        elif player_choice == '3':
+        elif player_choice == '3':   # Disable/Enable Questions
+            #print the questions from json file manager
             question_manager.toggle_question_menu()
         elif player_choice == '4':
             practice_mode()
         elif player_choice == '5':
-            test_mode_menu()
+            #test_mode_menu()
+            pass
 
         else:
             print("Invalid choice. Please choose a valid option.") 

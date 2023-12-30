@@ -3,8 +3,8 @@ from FreeFormQuestion import FreeFormQuestion
 from MultipleChoiceQuestion import MultipleChoiceQuestion
 from PracticeMode import PracticeMode
 from FileManager import FileManager
-from Learning_tool import main_manu
-from question import FreeFormQuestion, MultipleChoiceQuestion
+from FreeFormQuestion import FreeFormQuestion
+from MultipleChoiceQuestion import MultipleChoiceQuestion
 
 
 class QuestionManager:
@@ -23,31 +23,40 @@ class QuestionManager:
             
             #question_to_be_added.append(new_question(question_type, question_text, expected_answer))
             return new_question
-    
-        def craete_multiple_choice_question(self):   
+        # TODO self/
+        def craete_multiple_choice_question(self, question_type, question_text):   
             #cпрашиваем сколько ответов, варианты ответов, праильный вариант ответа и если все заполнено, все сохраняем в список  question_to_be_added 
             num_options = int(input("Enter the number of answer options: "))
-            options = [input(f"Enter option {i + 1}: ") for i in range(num_options)]
-            correct_option = input("Enter the correct option: ")
-            new_question = MultipleChoiceQuestion(question_type, question_text, options, correct_option, options)
+            if num_options is int:
+                    pass # continueю возможно с исключением
+            else:
+                ("please enter numbet of options")
+                #ask again
+                    
+
+            options = [input(f"Enter incorrect options {i} times: ") for i in range(num_options - 1)]
+            correct_option = input("Now enter the correct option: ")
+            new_question = MultipleChoiceQuestion(question_type, question_text, options, correct_option)
+            print("You have prepared the question for saving.")
             return new_question
 
         new_question = None
 
         while True:
+            print('You are in the question saving menu')
             question_type = input("Enter the question type (1 for FreeFormQuestion, 2 for MultipleChoiceQuestion): ")
             if question_type == '1' or question_type == '2':
                 question_text = input("Enter the question text: ")
-                if not question_text or len(question_text) > 5:
+                if not question_text or len(question_text) < 5:
                     print("Please, Enter the question")
                 else:    
                     if question_type == '1':
-                        question_type = free_form_question_type
-                        new_question = create_free_form_question(question_type, question_text)
+                        question_type = "free_form_question_type"
+                        new_question = create_free_form_question(self, question_type, question_text)
                         # когда вопрос сохранили выходим цикла, но не из функциию. пользователю опять предлагается ввести вопров, пока он не нажмет выход
                     elif question_type == '2':
-                        question_type = multiple_choice_question_type
-                        new_question = craete_multiple_choice_question(question_type, question_text)    
+                        question_type = "multiple_choice_question_type"
+                        new_question = craete_multiple_choice_question(self, question_type, question_text)    
                         # когда вопрос сохранили выходим цикла, но не из функциию. пользователю опять предлагается ввести вопров, пока он не нажмет выход
                     question_to_be_added.append(new_question)
             elif question_type == "main_manu":
@@ -57,12 +66,24 @@ class QuestionManager:
             else:
                 print("Invalid question type.")
 
-    
+    def toggle_question_menu(self):
+        question_id = int(input("Enter the ID of the question to toggle: "))
+        disable = input("Enter 'disable' to deactivate or 'enable' to activate the question: ").lower() == 'disable'
+        self.disable_enable_question(question_id, disable)
+
+    def disable_enable_question(self, question_id, disable=True):
+
+        for question in self.questions:
+            file_manager = FileManager()
+            if question.id == question_id:
+                question.is_active = not disable
+                file_manager.save_questions_to_json(question)
+                break
             
                   
 
     
- '''
+    '''
 
     def view_statistics(self):
         for question in self.questions:
@@ -71,17 +92,7 @@ class QuestionManager:
                   f"Practice Count: {question.practice_count}, Test Count: {question.test_count}, "
                   f"Correct Percentage: {question.total_correct_percentage}%")
 
-    def toggle_question_menu(self):
-        question_id = int(input("Enter the ID of the question to toggle: "))
-        disable = input("Enter 'disable' to deactivate or 'enable' to activate the question: ").lower() == 'disable'
-        self.disable_enable_question(question_id, disable)
-
-    def disable_enable_question(self, question_id, disable=True):
-        for question in self.questions:
-            if question.id == question_id:
-                question.is_active = not disable
-                self.file_manager_instance.save_questions(self.questions)
-                break
+    
 '''
     
 '''
