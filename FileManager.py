@@ -14,13 +14,15 @@ class FileManager:
 
     def save_questions_to_json(self,new_question_list):
         #проходимся по всему спискувопросов из new_question_list полученного из Learning_tool и для каждого спрашиваем тип вопроса и сохраняем
-        
-        for question in new_question_list:
-            self.save_to_json(question.as_dict())
+        with open('questions.json', 'a') as file:        
+            json.dump(new_question_list, file)
+
+        #for question in new_question_list:
+           # self.save_to_json(question.as_dict())
             
-    def save_to_json(self, question):            
-        with open('questions.json', 'a') as file:
-            json.dump(question, file)
+    #def save_to_json(self, question):            
+     #   with open('questions.json', 'a') as file:
+     #       json.dump(question, file)
 
     #получаем из списка вопросов сохраненных количество вопросов и порядковые номера, присваиваем айди каждому новому вопросу согласно порядковому номеру
                 
@@ -40,7 +42,7 @@ class FileManager:
         if data['question_type'] == 'free_form':
             return FreeFormQuestion(data['question_text'], data['answer'], data['is_active'])
         elif data['question_type'] == 'multiple_choice':
-            return MultipleChoiceQuestion(data['question_text'], data['answer_options'], data['correct_option'], data['is_active'])
+            return MultipleChoiceQuestion(1, data['question_text'], data['answer_options'], data['correct_option'], data['is_active'])
         else:
             raise ValueError(f"Unsupported question type: {data['question_type']}")
 
@@ -97,9 +99,5 @@ class FileManager:
     def total_questions_count(self):
         with open('questions.json', 'r') as file:
             lines = file.readlines()
-        content = file.read()
-        # Разделяем текст на строки
-        lines = content.splitlines()
-        # Получаем количество строк
         total_questions_count = len(lines)
         return total_questions_count

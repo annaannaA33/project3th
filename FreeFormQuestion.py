@@ -4,7 +4,7 @@ from Question import Question
 
 class FreeFormQuestion(Question):
     def __init__(self, question_type, question_text, expected_answer, is_active=True):
-        super().__init__('free_form',  question_type, question_text, is_active)
+        super().__init__(question_type, question_text, is_active)
         self.expected_answer = expected_answer
 
     def update_statistics(self, is_correct):
@@ -18,7 +18,7 @@ class FreeFormQuestion(Question):
                  'question_text': self.get_question_text(),
                  'expected_answer': self.expected_answer,
                  'is_active': self.get_is_active()
-                 }\n
+                 }
      
     
         
